@@ -101,164 +101,115 @@
     <!-- ======= Post Grid Section ======= -->
     <section id="posts" class="posts">
       <div class="container" data-aos="fade-up">
-        <div class="row g-5 justify-content-center">
-          <div class="col-lg-7 border custom-border">
+        <div class="row g-5 justify-content-between">
+          <div class="col-lg-8 border custom-border">
             <div class="section-header d-flex justify-content-center align-items-center mb-5 pt-4">
               <h3>Main Post</h3>
             </div>
-              <?php
-                include "connect.php";
+            <?php
+              include "connect.php";
 
-                $limit = 3;
-                                      
-                if(isset($_GET['page'])){
-                    $page = $_GET['page'];                                         
-                }else{
-                    $page = 1;
-                }
-                $offset = ($page - 1) * $limit;
+              $limit = 3;
+                                    
+              if(isset($_GET['page'])){
+                  $page = $_GET['page'];                                         
+              }else{
+                  $page = 1;
+              }
+              $offset = ($page - 1) * $limit;
 
-                $sql = "SELECT news.news_id, news.title, news.post_date, news.description, news.admin,
-                          categories.category_name, admins.username, news.category, news.post_image
-                        FROM news 
-                        LEFT JOIN categories ON news.category = categories.category_id
-                        LEFT JOIN admins ON news.admin = admins.admin_id
-                        ORDER BY news.news_id 
-                        ASC LIMIT {$offset},{$limit}";
-                
-                $result = mysqli_query($conn,$sql) or die("Query Failed.");
-                if (mysqli_num_rows($result) > 0) {
-                  while ($row = mysqli_fetch_assoc($result)) {
-              ?>
+              $sql = "SELECT news.news_id, news.title, news.post_date, news.description, news.admin,
+                        categories.category_name, admins.username, news.category, news.post_image
+                      FROM news 
+                      LEFT JOIN categories ON news.category = categories.category_id
+                      LEFT JOIN admins ON news.admin = admins.admin_id
+                      ORDER BY news.news_id 
+                      ASC LIMIT {$offset},{$limit}";
+              
+              $result = mysqli_query($conn,$sql) or die("Query Failed.");
+              if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+            ?>
 
-              <div class="post-entry-1 lg section-header">
-                <div class="text-center">
-                  <a href="single-post.php?id=<?php echo $row['news_id']; ?>">
-                    <img src="admin/upload/<?php echo $row['post_image']; ?>" class="img-fluid" width="600" height="300">
-                  </a>
-                </div>
-                <div class="post-meta">
-                  <span>
-                    <a href='category.php?cid=<?php echo $row['category']; ?>'><?php echo $row['category_name']; ?></a>
-                  </span> <span class="mx-1">&bullet;</span>
-                  <span>
-                    <a><?php echo $row['post_date']; ?></a>
-                  </span> <span class="mx-1">&bullet;</span>
-                  <span>
-                    <a href='author.php?authid=<?php echo $row['admin']; ?>'><?php echo $row['username']; ?></a>
-                  </span>
-                </div>
-                <h3>
-                  <a href="single-post.php?id=<?php echo $row['news_id']; ?>"><?php echo $row['title']; ?></a>
-                </h3>
-                <p class="mb-4 d-block h6">
-                  <?php echo substr($row['description'],0,200) . "..."; ?>
-                </p>
-            </div>
-
-              <?php 
-                    }
-                  }else {
-                    echo "<h2>No Record Found.</h2>";
-                  }
-              ?>
-
-              <?php
-                // Show Pagination
-                $sql1 = "SELECT * FROM news";
-                $result1 = mysqli_query($conn, $sql1) or die("Query Failed.");
-
-                if(mysqli_num_rows($result1) > 0) {
-
-                $total_record = mysqli_num_rows($result1);
-
-                $total_page = ceil($total_record / $limit);
-
-                echo '<ul class="pagination justify-content-center">';
-                if($page > 1){
-                    echo '<li class="page-item"><a class="page-link" href="index.php?page='.($page - 1).'">Prev</a></li>';
-                }
-                for($i = 1; $i <= $total_page; $i++){
-                if($i == $page){
-                    $active = "active";
-                }else{
-                    $active = "";
-                }
-                    echo '<li class="page-item '.$active.'"><a class="page-link" href="index.php?page=' . $i . '">' . $i . '</a></li>';
-                }
-                if($total_page > $page){
-                    echo '<li class="page-item"><a class="page-link" href="index.php?page='.($page + 1).'">Next</a></li>';
-                }
-                    echo '</ul>';
-                }else{
-                  echo "<h2>No Record Found.</h2>";
-                }    
-              ?>
-              <div class="pb-4"></div>
-            </div>
-            <!-- End Main Post -->
-            
-            <div class="col col-sm-1"></div>
-            
-            <!-- Recent Post -->
-            <div id="sidebar" class="col-lg-4 border custom-border">
-              <div class="row g-5 d-flex">
-                <div class="col-md-12">
-                  <div class="section-header d-flex align-items-center mb-5 pt-4">
-                    <h3>Recent Post</h3>
-                  </div>
-                    <?php
-                      include "connect.php";
-
-                      $limit = 5;          
-
-                      $sql = "SELECT news.news_id, news.title, news.post_date,
-                                categories.category_name, news.category, news.post_image
-                              FROM news 
-                              LEFT JOIN categories ON news.category = categories.category_id
-                              ORDER BY news.news_id 
-                              DESC LIMIT {$offset},{$limit}";
-                      
-                      $result = mysqli_query($conn,$sql) or die("Query Failed : Recent Post");
-                      if (mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                    ?>
-
-                  <div class="post-entry-1 section-header">
-                    <div class="text-center">
-                      <a href="single-post.php?id=<?php echo $row['news_id']; ?>">
-                        <img src="admin/upload/<?php echo $row['post_image']; ?>" class="img-fluid" width="600" height="300">
-                      </a>
-                    </div>
-                    <div class="post-meta">
-                        <span class="h6 d-grid gap-5">
-                          <a href="single-post.php?id=<?php echo $row['news_id']; ?>"><?php echo $row['title']; ?></a>
-                        </span></span>
-                        <span>
-                          <a href='category.php?cid=<?php echo $row['category']; ?>'><?php echo $row['category_name']; ?></a>
-                        </span> <span class="mx-1">&bullet;</span>
-                        <span>
-                          <a><?php echo $row['post_date']; ?></a>
-                        </span><br><br>
-                        <a href="single-post.php?id=<?php echo $row['news_id']; ?>">Read More</a>
-                    </div>
-                    </div>
-                    <?php 
-                          }
-                        }
-                    ?>
-                  </div>
-                </div>
+            <div class="post-entry-1 lg section-header">
+              <div class="text-center">
+                <a href="single-post.php?id=<?php echo $row['news_id']; ?>">
+                  <img src="admin/upload/<?php echo $row['post_image']; ?>" class="img-fluid" width="600" height="300">
+                </a>
               </div>
-              <div class="pb-4"></div>
+              <div class="post-meta">
+                <span>
+                  <a href='category.php?cid=<?php echo $row['category']; ?>'><?php echo $row['category_name']; ?></a>
+                </span> <span class="mx-1">&bullet;</span>
+                <span>
+                  <a><?php echo $row['post_date']; ?></a>
+                </span> <span class="mx-1">&bullet;</span>
+                <span>
+                  <a href='author.php?authid=<?php echo $row['admin']; ?>'><?php echo $row['username']; ?></a>
+                </span>
+              </div>
+              <h3>
+                <a href="single-post.php?id=<?php echo $row['news_id']; ?>"><?php echo $row['title']; ?></a>
+              </h3>
+              <p class="mb-4 d-block h6">
+                <?php echo substr($row['description'],0,200) . "..."; ?>
+              </p>
             </div>
-            <!-- End Recent Post -->
+
+            <?php 
+                  }
+                }else {
+                  echo "<h2>No Record Found.</h2>";
+                }
+            ?>
+
+            <div class="pb-4"></div>
+            
+            <?php
+              // Show Pagination
+              $sql1 = "SELECT * FROM news";
+              $result1 = mysqli_query($conn, $sql1) or die("Query Failed.");
+
+              if(mysqli_num_rows($result1) > 0) {
+
+              $total_record = mysqli_num_rows($result1);
+
+              $total_page = ceil($total_record / $limit);
+
+              echo '<ul class="pagination justify-content-center">';
+              if($page > 1){
+                  echo '<li class="page-item"><a class="page-link" href="index.php?page='.($page - 1).'">Prev</a></li>';
+              }
+              for($i = 1; $i <= $total_page; $i++){
+              if($i == $page){
+                  $active = "active";
+              }else{
+                  $active = "";
+              }
+                  echo '<li class="page-item '.$active.'"><a class="page-link" href="index.php?page=' . $i . '">' . $i . '</a></li>';
+              }
+              if($total_page > $page){
+                  echo '<li class="page-item"><a class="page-link" href="index.php?page='.($page + 1).'">Next</a></li>';
+              }
+                  echo '</ul>';
+              }else{
+                echo "<h2>No Record Found.</h2>";
+              }    
+            ?>
+          </div>
+          <!-- End Main Post -->
+          
+          <!-- Recent Post -->
+          <?php include "side-post.php" ?>
+          <!-- End Recent Post -->
+
         </div>
         <!-- End .row -->
       </div>
     </section> 
     <!-- End Post Grid Section -->
-  </main><!-- End #main -->
+  </main>
+  <!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <?php include "footer.php"; ?>

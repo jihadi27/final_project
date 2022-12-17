@@ -3,7 +3,7 @@
 <div class="footer-content">
   <div class="container">
 
-    <div class="row g-2">
+    <div class="row g-2 justify-content-center">
       <div class="col-lg-4">
         <h3 class="footer-heading">About AnyNews</h3>
         <p>AnyNews is a website that provides news or information from around the world, 
