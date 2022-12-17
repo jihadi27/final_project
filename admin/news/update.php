@@ -50,10 +50,10 @@
                         <a href="../news/index.php" class="nav-link text-truncate">
                         <i class="fs-5 bi-newspaper"></i><span class="ms-1 d-none d-sm-inline">News</span></a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="../category/index.php" class="nav-link text-truncate">
                         <i class="fs-5 bi-tags-fill"></i><span class="ms-1 d-none d-sm-inline">Category</span> </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
