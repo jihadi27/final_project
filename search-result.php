@@ -133,7 +133,7 @@
 
                   echo '<ul class="pagination justify-content-center">';
                   if ($page > 1) {
-                    echo '<li class="page-item"><a class="page-link" href="index.php?search=' . $search_term . '&page=' . ($page - 1) . '">Prev</a></li>';
+                    echo '<li class="page-item"><a class="page-link" href="search-result.php?search=' . $search_term . '&page=' . ($page - 1) . '">Prev</a></li>';
                   }
                   for ($i = 1; $i <= $total_page; $i++) {
                     if ($i == $page) {
@@ -141,10 +141,10 @@
                     } else {
                       $active = "";
                     }
-                    echo '<li class="page-item ' . $active . '"><a class="page-link" href="index.php?search=' . $search_term . '&page=' . $i . '">' . $i . '</a></li>';
+                    echo '<li class="page-item ' . $active . '"><a class="page-link" href="search-result.php?search=' . $search_term . '&page=' . $i . '">' . $i . '</a></li>';
                   }
                   if ($total_page > $page) {
-                    echo '<li class="page-item"><a class="page-link" href="index.php?search=' . $search_term . '&page=' . ($page + 1) . '">Next</a></li>';
+                    echo '<li class="page-item"><a class="page-link" href="search-result.php?search=' . $search_term . '&page=' . ($page + 1) . '">Next</a></li>';
                   }
                     echo '</ul>';
                   }

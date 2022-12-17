@@ -40,9 +40,9 @@
   <main id="main">
     <section>
       <div class="main-container">
-        <div class="row d-flex">
-          <div class="col-sm-1"></div>
-          <div class="col-md-6 border custom-border">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-8 border custom-border">
+
             <!-- Post Container -->
             <div class="post-container">
               <?php 
@@ -117,7 +117,8 @@
                   }else {
                     echo "<h2>No Record Found.</h2>";
                   }
-              
+              ?>
+              <?php
               // Show Pagination
 
               if(mysqli_num_rows($result1) > 0) {
@@ -128,7 +129,7 @@
 
                 echo '<ul class="pagination justify-content-center">';
                 if($page > 1){
-                    echo '<li class="page-item"><a class="page-link" href="category.php?cid='.$cat_id .'&page='.($page - 1).'">Prev</a></li>';
+                    echo '<li class="page-item"><a class="page-link" href="category.php?cid='.$cat_id.'&page='.($page - 1).'">Prev</a></li>';
                 }
                 for($i = 1; $i <= $total_page; $i++){
                 if($i == $page){
@@ -136,7 +137,7 @@
                 }else{
                     $active = "";
                 }
-                    echo '<li class="page-item '.$active.'"><a class="page-link" href="category.php?cid='.$cat_id .'&page=' . $i . '">' . $i . '</a></li>';
+                    echo '<li class="page-item '.$active.'"><a class="page-link" href="category.php?cid='.$cat_id.'&page=' . $i . '">' . $i . '</a></li>';
                 }
                 if($total_page > $page){
                     echo '<li class="page-item"><a class="page-link" href="category.php?cid='.$cat_id .'&page='.($page + 1).'">Next</a></li>';

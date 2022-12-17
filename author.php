@@ -41,7 +41,7 @@
     <section>
       <div class="main-container">
         <div class="row d-flex justify-content-center">
-          <div class="col-md-6 border">
+          <div class="col-md-8 border custom-border">
 
             <!-- Post Container -->
             <div class="post-container">
@@ -52,14 +52,12 @@
                   $auth_id = $_GET['authid'];
                 
 
-                $sql1 = "SELECT * FROM news 
-                        JOIN admins  
-                        ON news.admin = admins.admin_id
+                $sql1 = "SELECT * FROM news JOIN admins ON news.admin = admins.admin_id
                         WHERE news.admin = {$auth_id}";
                 $result1 = mysqli_query($conn, $sql1) or die("Query Failed.");
                 $row1 = mysqli_fetch_assoc($result1);
               ?>
-              <div class="section-header d-flex justify-content-center align-items-center mb-5">
+              <div class="section-header d-flex justify-content-center align-items-center mb-5 pt-4">
                 <h3 class="page-heading">Author: "<?php echo $row1['username']; ?>"</h3>
               </div>
               <?php
@@ -131,28 +129,28 @@
 
                   echo '<ul class="pagination justify-content-center">';
                   if ($page > 1) {
-                    echo '<li class="page-item"><a class="page-link" href="index.php?authid=' . $auth_id . '&page=' . ($page - 1) . '">Prev</a></li>';
+                    echo '<li class="page-item"><a class="page-link" href="author.php?authid='.$auth_id.'&page='.($page - 1).'">Prev</a></li>';
                   }
-                  for ($i = 1; $i <= $total_page; $i++) {
-                    if ($i == $page) {
+                  for($i = 1; $i <= $total_page; $i++){
+                  if($i == $page){
                       $active = "active";
-                    } else {
+                  }else{
                       $active = "";
-                    }
-                    echo '<li class="page-item ' . $active . '"><a class="page-link" href="index.php?authid=' . $auth_id . '&page=' . $i . '">' . $i . '</a></li>';
                   }
-                  if ($total_page > $page) {
-                    echo '<li class="page-item"><a class="page-link" href="index.php?authid=' . $auth_id . '&page=' . ($page + 1) . '">Next</a></li>';
+                      echo '<li class="page-item '.$active.'"><a class="page-link" href="author.php?authid='.$auth_id.'&page='.$i.'">'.$i.'</a></li>';
                   }
-                  echo '</ul>';
+                  if($total_page > $page){
+                      echo '<li class="page-item"><a class="page-link" href="author.php?authid='.$auth_id.'&page='.($page + 1).'">Next</a></li>';
                   }
+                      echo '</ul>';
+                }
                 }else{
                   echo "<h2>No Record Found.</h2>";
                 }    
               ?>
+              <div class="pb-4"></div>
             </div>
             <!-- End Container -->
-
           </div>
         </div>
       </div>

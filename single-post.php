@@ -61,7 +61,8 @@
             <!-- ======= Single Post Content ======= -->
             <div class="single-post">
               <div class="post-meta">
-                <span><br>
+                <div class="pt-5"></div>
+                <span>
                   <a href='category.php?cid=<?php echo $row['category']; ?>'><?php echo $row['category_name']; ?>
                     <i class="fa-duotone fa-user-secret"></i>
                   </a>
@@ -70,18 +71,23 @@
                   <?php echo $row['post_date']; ?>
                 </span> <span class="mx-1">&bullet;</span> 
                 <span>
-                  <a href='author.php?authid=<?php echo $row['admin']; ?>'></a> <?php echo $row['username']; ?>
+                  <a href='author.php?authid=<?php echo $row['admin']; ?>'><?php echo $row['username']; ?></a>
                 </span>
               </div>
-              <h1 class="mb-5"><?php echo $row['title']; ?></h1>
+              <span>
+                <h1 class="mb-5"><?php echo $row['title']; ?></h1>
+              </span>
               <div class="text-center my-4">
                 <img src="admin/upload/<?php echo $row['post_image']; ?>" 
                 class="image-fluid rounded" height="300" width="500">
                 <br><br>
               </div>
-              <p class="h6"><?php echo $row['description']; ?></p>
-              
-            </div><!-- End Single Post Content -->
+              <span>
+                <p class="h6"><?php echo $row['description']; ?></p>
+              </span>
+              <div class="pb-5"></div>
+            </div>
+            <!-- End Single Post Content -->
               <?php 
                     }
                   }else {

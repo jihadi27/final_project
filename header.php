@@ -25,7 +25,6 @@
             
             ?>
             <ul>
-            <!-- <li><a href='<?php echo '$hostname'; ?>'>Home</a></li> -->
               <?php while ($row = mysqli_fetch_assoc($result)) {
 
                 if(isset($_GET['cid'])) {
@@ -56,8 +55,9 @@
 
         <!-- ======= Search Form ======= -->
         <div class="search-form-wrap js-search-form-wrap">
+
           <form action="search-result.php" class="search-form" method="get">
-            <a href="search-result.php?search=<?php echo $search_term; ?>" type="button"><span class="icon bi-search"></span></a>
+            <span class="icon bi-search"></span>
             <input type="text" placeholder="Search" class="form-control">
             <button class="btn js-search-close"><span class="bi-x"></span></button>
           </form>
